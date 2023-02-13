@@ -2,27 +2,23 @@ package main
 
 import "fmt"
 
-func main() {
-
-	var arrs = [...]int{3, 10, 4, 1, 8}
-
-	leng := len(arrs)
-
-	for j := 0; j < leng-1; j++ {
-		maxIndex := j
-		max := arrs[j]
-		for i := j + 1; i < leng; i++ {
-			if max < arrs[i] {
-				max = arrs[i]
-				maxIndex = i
+func selectionSort(arr []int) []int {
+	n := len(arr)
+	for i := 0; i < n-1; i++ {
+		minIndex := i
+		for j := i + 1; j < n; j++ {
+			if arr[j] < arr[minIndex] {
+				minIndex = j
 			}
 		}
-
-		if maxIndex != j {
-			arrs[j], arrs[maxIndex] = arrs[maxIndex], arrs[j]
-		}
-
-		fmt.Printf("第%d次arr=%v\n", j+1, arrs)
+		arr[i], arr[minIndex] = arr[minIndex], arr[i]
 	}
+	return arr
+}
 
+func main() {
+	arr := []int{64, 25, 12, 22, 11}
+	fmt.Println("Before sorting: ", arr)
+	arr = selectionSort(arr)
+	fmt.Println("After sorting: ", arr)
 }

@@ -7,7 +7,7 @@ import (
 
 type Queue struct {
 	MaxSize int
-	Arrays  [4]int
+	Items   []int //只能村4-1个
 	Head    int
 	Tail    int
 }
@@ -16,7 +16,8 @@ func (t *Queue) Push(val int) (err error) {
 	if t.IsFull() {
 		return errors.New("queue is full")
 	}
-	t.Arrays[t.Tail] = val
+	t.Items[t.Tail] = val
+	//将tail指向下一个位置
 	t.Tail = (t.Tail + 1) % t.MaxSize
 	fmt.Println("Tail=", t.Tail)
 	return
@@ -27,7 +28,8 @@ func (t *Queue) Pop() (val int, err error) {
 	if t.IsEmpty() {
 		return 0, errors.New("queue is empty")
 	}
-	val = t.Arrays[t.Head]
+	val = t.Items[t.Head]
+	//将head指向下一个位置
 	t.Head = (t.Head + 1) % t.MaxSize
 	fmt.Println("Head=", t.Head)
 	return
@@ -44,7 +46,7 @@ func (t *Queue) Show() {
 	}
 	temp := t.Head
 	for i := 0; i < size; i++ {
-		fmt.Printf("arr[%d]=%d\n", temp, t.Arrays[temp])
+		fmt.Printf("arr[%d]=%d\n", temp, t.Items[temp])
 		temp = (temp + 1) % t.MaxSize
 	}
 }
@@ -60,8 +62,10 @@ func (t *Queue) IsFull() bool {
 
 func main() {
 
+	var size = 4
 	var queue = Queue{
-		MaxSize: 4,
+		MaxSize: size,
+		Items:   make([]int, size),
 	}
 
 	for {
@@ -87,8 +91,10 @@ func main() {
 			fmt.Println(queue.Tail)
 		case "head":
 			fmt.Println(queue.Head)
-		}
+		case "size":
+			fmt.Println(queue.Size())
 
+		}
 	}
 
 }

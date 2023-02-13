@@ -9,8 +9,6 @@ type Node struct {
 }
 
 func add(head *Node, node *Node) {
-	//fmt.Println("node_add_start=", node)
-	//fmt.Println("head_add_start=", head)
 
 	if head.Next == nil {
 		head.Id = node.Id
@@ -29,10 +27,6 @@ func add(head *Node, node *Node) {
 
 	temp.Next = node
 	node.Next = head
-	//fmt.Println("head=", head)
-	//fmt.Println("temp=", temp)
-	//fmt.Println("node_add_end=", node)
-	//fmt.Println("head_add_end=", head)
 
 }
 
@@ -125,20 +119,12 @@ func main() {
 		Id:   3,
 		Name: "tom3",
 	}
-	//fmt.Println("node0=", node1)
-	//fmt.Println("head0=", head)
 
 	add(head, node1)
-	//fmt.Println("node1=", node1)
-	//fmt.Println("head1=", head)
 	add(head, node2)
-	//fmt.Println(head)
 	add(head, node3)
 
-	//fmt.Println(head.Next)
-	//fmt.Println(node2)
 	list(head)
-	//fmt.Println(head)
 
 	head = Del(head, 2)
 	list(head)
