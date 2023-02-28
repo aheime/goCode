@@ -5,9 +5,8 @@ import "fmt"
 func main() {
 	str := "aheime"
 	slice := str[:2]
-	for i := range str {
-		println(str[i])
-		fmt.Printf("str: %v, %p\n", str, str[i])
+	for i, v := range str {
+		fmt.Printf("str: %v, %p\n", v, str[i])
 	}
 
 	fmt.Printf("str: %v, %p\n", str, &str)
